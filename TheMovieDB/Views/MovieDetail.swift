@@ -13,6 +13,7 @@ struct MovieDetail: ConnectedView {
         let toggleFavorite: () -> Void
     }
 
+
     // MARK: - Map State To Props -
 
     /// Map State To Props
@@ -39,27 +40,23 @@ struct MovieDetail: ConnectedView {
         NavigationView {
 
             VStack {
-
                 RemoteImage(url: props.poster)
-                Spacer()
-
+                Divider()
                 Text(props.overview)
                     .font(.subheadline)
                     .lineLimit(0)
                 Spacer()
-
-            }.padding()
-
-        }
-        .navigationBarTitle(Text(props.name), displayMode: .large)
-        .navigationBarItems(trailing: Button(action: props.toggleFavorite) {
-            if props.isFavorite {
-                Image(systemName: "star.fill")
-                    .foregroundColor(Color.yellow)
-            } else {
-                Image(systemName: "star")
-                    .foregroundColor(Color.gray)
             }
-        })
-    }
+
+        }.navigationBarTitle(Text(props.name), displayMode: .large)
+            .navigationBarItems(trailing: Button(action: props.toggleFavorite) {
+                if props.isFavorite {
+                        Image(systemName: "star.fill")
+                            .foregroundColor(Color.yellow)
+                    } else {
+                        Image(systemName: "star")
+                            .foregroundColor(Color.gray)
+                    }
+                })
+        }
 }

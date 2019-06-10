@@ -1,7 +1,21 @@
 import Foundation
 
 
-let showcaseMovies: [Movie] = load("moviesShowcaseData.json")
+let moviesShowcaseData: [Movie] = load("moviesShowcaseData.json")
+
+let showcaseMovies: [Movie] = moviesShowcaseData.compactMap { movie in
+
+    func poster(_ poster: URL?) -> URL? {
+        guard let poster = poster else { return nil }
+        return URL(string: "http://image.tmdb.org/t/p/")!
+            .appendingPathComponent("w780")
+            .appendingPathComponent(poster.absoluteString)
+    }
+
+    return Movie(id: movie.id, poster: poster(movie.poster), name: movie.name, released: movie.released, overview: movie.overview)
+}
+
+
 
 func load<T: Decodable>(_ filename: String, as type: T.Type = T.self) -> T {
     let data: Data

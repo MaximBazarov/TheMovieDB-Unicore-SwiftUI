@@ -27,15 +27,28 @@ struct MovieRow: ConnectedView {
     }
     
     static func body(props: Props) -> some View {
+        VStack {
 
-        HStack {
-            Text(verbatim: props.name)
-            Spacer()
+            HStack {
+                RemoteImage(url: props.poster)
+                    .frame(width: 50)
 
-            if props.isFavorite {
-                Image(systemName: "star.fill")
-                    .imageScale(.medium)
-                    .foregroundColor(.yellow)
+                VStack(alignment: .leading) {
+                    Text(verbatim: props.name)
+                        .font(.headline)
+
+                    Spacer()
+
+                    Text(verbatim: props.released)
+                        .font(.subheadline)
+                }
+
+
+                if props.isFavorite {
+                    Image(systemName: "star.fill")
+                        .imageScale(.medium)
+                        .foregroundColor(.yellow)
+                }
             }
         }
     }

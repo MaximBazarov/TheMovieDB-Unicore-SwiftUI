@@ -15,7 +15,8 @@
 		A9138CDA22AE785B00381A46 /* ConnectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9138CD322AE785B00381A46 /* ConnectedView.swift */; };
 		A9138CDB22AE785B00381A46 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9138CD422AE785B00381A46 /* Store.swift */; };
 		A9138CDC22AE785B00381A46 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9138CD522AE785B00381A46 /* Action.swift */; };
-		A9138CDF22AE790F00381A46 /* ImageFromURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9138CDE22AE790E00381A46 /* ImageFromURL.swift */; };
+		A966AB2222AE807700FBF6DD /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A966AB2022AE7F8900FBF6DD /* ImageLoader.swift */; };
+		A966AB2422AE81DA00FBF6DD /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A966AB1E22AE7F6600FBF6DD /* RemoteImage.swift */; };
 		A9ABE71522AE765000E663E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9ABE71422AE765000E663E2 /* Assets.xcassets */; };
 		A9ABE71B22AE765000E663E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9ABE71922AE765000E663E2 /* LaunchScreen.storyboard */; };
 		A9ABE72622AE765000E663E2 /* TheMovieDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9ABE72522AE765000E663E2 /* TheMovieDBTests.swift */; };
@@ -62,7 +63,8 @@
 		A9138CD322AE785B00381A46 /* ConnectedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectedView.swift; sourceTree = "<group>"; };
 		A9138CD422AE785B00381A46 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		A9138CD522AE785B00381A46 /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
-		A9138CDE22AE790E00381A46 /* ImageFromURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageFromURL.swift; sourceTree = "<group>"; };
+		A966AB1E22AE7F6600FBF6DD /* RemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
+		A966AB2022AE7F8900FBF6DD /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		A9ABE70B22AE764F00E663E2 /* TheMovieDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheMovieDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9ABE71422AE765000E663E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A9ABE71A22AE765000E663E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -131,7 +133,8 @@
 		A9138CDD22AE790E00381A46 /* ImageDownloader */ = {
 			isa = PBXGroup;
 			children = (
-				A9138CDE22AE790E00381A46 /* ImageFromURL.swift */,
+				A966AB1E22AE7F6600FBF6DD /* RemoteImage.swift */,
+				A966AB2022AE7F8900FBF6DD /* ImageLoader.swift */,
 			);
 			path = ImageDownloader;
 			sourceTree = "<group>";
@@ -388,7 +391,6 @@
 				A9ABE75A22AE76BC00E663E2 /* ToggleFavoritesOnly.swift in Sources */,
 				A9ABE75522AE76BC00E663E2 /* ShowcaseMovies.swift in Sources */,
 				A9138CD822AE785B00381A46 /* StoreProvider.swift in Sources */,
-				A9138CDF22AE790F00381A46 /* ImageFromURL.swift in Sources */,
 				A9ABE75E22AE76BC00E663E2 /* MovieRow.swift in Sources */,
 				A9138CDA22AE785B00381A46 /* ConnectedView.swift in Sources */,
 				A9ABE75822AE76BC00E663E2 /* State.swift in Sources */,
@@ -396,6 +398,8 @@
 				A9ABE76022AE76BC00E663E2 /* SceneDelegate.swift in Sources */,
 				A9ABE75922AE76BC00E663E2 /* ToggleMovieFavorite.swift in Sources */,
 				A9138CDC22AE785B00381A46 /* Action.swift in Sources */,
+				A966AB2222AE807700FBF6DD /* ImageLoader.swift in Sources */,
+				A966AB2422AE81DA00FBF6DD /* RemoteImage.swift in Sources */,
 				A9ABE75D22AE76BC00E663E2 /* MovieDetail.swift in Sources */,
 				A9138CDB22AE785B00381A46 /* Store.swift in Sources */,
 				A9138CD622AE785B00381A46 /* Reducable.swift in Sources */,
@@ -569,7 +573,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "TheMovieDB/Preview\\ Content";
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = TheMovieDB/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -588,7 +592,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "TheMovieDB/Preview\\ Content";
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = TheMovieDB/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
