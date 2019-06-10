@@ -3,7 +3,7 @@
 //  TheMovieDB
 //
 //  Created by Maxim Bazarov on 6/10/19.
-//  Copyright © 2019 Maxim Bazarov. All rights reserved.
+//  Copyright © 2019 Apple. All rights reserved.
 //
 
 import SwiftUI

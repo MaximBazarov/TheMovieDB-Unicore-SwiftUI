@@ -3,7 +3,7 @@
 //  TheMovieDB
 //
 //  Created by Maxim Bazarov on 6/10/19.
-//  Copyright © 2019 Maxim Bazarov. All rights reserved.
+//  Copyright © 2019 Apple. All rights reserved.
 //
 
 import UIKit
@@ -15,13 +15,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+
+        let initialState = AppState(
+            movieByID: showcaseMovies.reduce(into: [:]) { map, landmark in
+                map[landmark.id] = landmark
+            },
+            allMovies: showcaseMovies.map { $0.id },
+            favoriteMovies: FavoriteMoviesState.initial,
+            showFavoritesOnly: false)
+
+
+        let store = Store(
+            initialState: initialState,
+            reducer: Reduce.state
+        )
 
         // Use a UIHostingController as window root view controller
         let window = UIWindow(frame: UIScreen.main.bounds)
-        window.rootViewController = UIHostingController(rootView: ContentView())
+        window.rootViewController = UIHostingController(rootView:
+            StoreProvider(store: store) {
+                MoviesList(
+                    row: MovieRow.init,
+                    details: MovieDetail.init
+                )
+            }
+        )
         self.window = window
         window.makeKeyAndVisible()
     }
