@@ -16,9 +16,9 @@ struct MoviesList<Row: View, Details: View>: ConnectedView {
     }
     
     func map(state: AppState, dispatch: @escaping (Action) -> Void) -> Props<Row, Details>  {
-        let showFavoritesOnly = Binding<Bool>(
-            getValue: { state.showFavoritesOnly },
-            setValue: { dispatch(Actions.ToggleFavoritesOnly(shouldShowFavorites: $0))}
+        let showFavoritesOnly = Binding<Bool> (
+            get: { state.showFavoritesOnly },
+            set: { dispatch(Actions.ToggleFavoritesOnly(shouldShowFavorites: $0))}
         )
         
         let allMovies = state.allMovies.compactMap { id in
@@ -51,9 +51,9 @@ struct MoviesList<Row: View, Details: View>: ConnectedView {
                 Toggle(isOn: props.showFavoritesOnly) {
                     Text("Show Favorites Only")
                 }
-                
+
                 ForEach(props.movies) { movie in
-                    NavigationButton(destination: movie.details) {
+                    NavigationLink(destination: movie.details) {
                         movie.row
                     }
                 }
