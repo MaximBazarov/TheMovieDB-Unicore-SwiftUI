@@ -37,18 +37,15 @@ struct MovieDetail: ConnectedView {
     // MARK: - Render -
     
     static func body(props: Props) -> some View {
-        NavigationView {
-
+        ScrollView {
             VStack {
                 RemoteImage(url: props.poster)
-                Divider()
                 Text(props.overview)
                     .font(.subheadline)
-                    .lineLimit(0)
+                    .padding()
                 Spacer()
             }
-
-        }.navigationBarTitle(Text(props.name), displayMode: .large)
+        }.navigationBarTitle(Text(props.name), displayMode: .inline)
             .navigationBarItems(trailing: Button(action: props.toggleFavorite) {
                 if props.isFavorite {
                         Image(systemName: "star.fill")

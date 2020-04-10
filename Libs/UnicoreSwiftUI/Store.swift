@@ -1,10 +1,9 @@
 import SwiftUI
 import Combine
 
-final class Store<S>: BindableObject {
-    let didChange = PassthroughSubject<S, Never>()
+final class Store<S>: ObservableObject {
+    @Published private(set) var state: S
     
-    private(set) var state: S
     private let reducer: (S, Action) -> S
     
     init(initialState: S, reducer: @escaping (S, Action) -> S) {
@@ -14,6 +13,5 @@ final class Store<S>: BindableObject {
     
     func dispatch(action: Action) {
         state = reducer(state, action)
-        didChange.send(state)
     }
 }

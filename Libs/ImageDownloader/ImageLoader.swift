@@ -3,9 +3,9 @@ import Combine
 
 
 // TODO:(DEVELOPER): Change to a proper image loader
-final class ImageLoader: BindableObject {
-
-    let didChange = PassthroughSubject<UIImage, Never>()
+final class ImageLoader: ObservableObject {
+    @Published var image: UIImage
+    
     private(set) var url: URL? {
         didSet {
             if let url = url {
@@ -13,23 +13,12 @@ final class ImageLoader: BindableObject {
             }
         }
     }
-
-    var hasImage: Bool { _image != nil }
-    var image: UIImage { _image ?? _placeholder}
-
-    var _placeholder = UIImage()
-
-    var _image: UIImage? {
-        didSet { didChange.send(_image ?? _placeholder) }
-    }
-
-    deinit {
-        task?.cancel()
-    }
-    var task: URLSessionTask?
+    
+    private var task: URLSessionTask?
 
     init(url: URL?) {
         self.url = url
+        self.image = UIImage() //placeholder
         if let url = url { load(url) }
     }
 
@@ -41,13 +30,15 @@ final class ImageLoader: BindableObject {
             guard let data = data, error == nil else { return }
             if let image = UIImage(data: data) {
                 DispatchQueue.main.async {
-                    self?._image = image
+                    self?.image = image
                 }
-
             }
         }
 
         task?.resume()
-
+    }
+    
+    deinit {
+        task?.cancel()
     }
 }
